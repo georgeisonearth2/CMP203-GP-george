@@ -15,9 +15,10 @@
 // Further includes should go here:
 #include "SOIL.h"
 #include <vector>
+#include "Vector3.h"
 
-
-class Scene{
+class Scene
+{
 
 public:
 	Scene(Input *in);
@@ -29,6 +30,15 @@ public:
 	void update(float dt);
 	// Resizes the OpenGL output based on new window size.
 	void resize(int w, int h);
+	// vertex struct def
+	struct Vertex
+	{
+		Vertex(Vector3 pos, Vector3 col) : position(pos), color(col) {};
+		Vector3 position;
+		Vector3 color;
+	};
+private:
+	void drawTriangle(Vertex v1, Vertex v2, Vertex v3);
 
 protected:
 	// configure opengl render pipeline
