@@ -40,7 +40,7 @@ public:
 private:
 	void drawTriangle(Vertex v1, Vertex v2, Vertex v3);
 	void drawQuad(Vertex v1, Vertex v2, Vertex v3, Vertex v4);
-	void drawStrip(Vertex* vArray, int size);
+	void drawStrip(Vertex* vArray, int size, float offset = 0);
 	bool isWireframe = false;
 
 protected:
@@ -66,6 +66,9 @@ protected:
 	int frame = 0, time, timebase = 0;
 	char fps[40];
 	char mouseText[40];
+
+
+	float offset = 0;
 
 };
 
