@@ -40,6 +40,7 @@ public:
 private:
 	void drawTriangle(Vertex v1, Vertex v2, Vertex v3);
 	void drawQuad(Vertex v1, Vertex v2, Vertex v3, Vertex v4);
+	void drawStrip(Vertex* vArray, int size);
 
 protected:
 	// configure opengl render pipeline

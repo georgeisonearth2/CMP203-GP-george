@@ -40,14 +40,28 @@ void Scene::render() {
 	glLoadIdentity();
 	// Set the camera
 	gluLookAt(0.0f, 0.0f, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+
+	//wireframe mode
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	
 	//triangle vertices
-	/*Vertex v1(Vector3(0, 1, 0), Colors::Red), v2(Vector3(-1, -1, 0), Colors::Green), v3(Vector3(1, -1, 0), Colors::Blue);
-	drawTriangle(v1, v2, v3);*/
+	/*drawTriangle(v1, v2, v3);
+	drawTriangle(v2, v3, v4);*/
+	Vertex
+		v1(Vector3(0, 0, 0), Colors::Red),
+		v2(Vector3(1, 0, 0), Colors::Green),
+		v3(Vector3(1, -1, 0), Colors::Blue),
+		v4(Vector3(2, 0, 0), Colors::Cyan),
+		v5(Vector3(2, -1, 0), Colors::Red),
+		v6(Vector3(3, 0, 0), Colors::Green),
+		v7(Vector3(3, -1, 0), Colors::Blue),
+		v8(Vector3(4, 0, 0), Colors::Cyan);
 
-	//quad vertices
-	Vertex v1(Vector3(0, 0, 0), Colors::Blue), v2(Vector3(1, 0, 0), Colors::Red), v3(Vector3(1, -1, 0), Colors::Red), v4(Vector3(0, -1, 0), Colors::Blue);
-	drawQuad(v1, v2, v3, v4);
+	drawStrip(new Vertex[8]{ v1, v2, v3, v4, v5, v6, v7, v8 }, 8);
+	
+	////quad vertices
+	//Vertex v1(Vector3(0, 0, 0), Colors::Blue), v2(Vector3(1, 0, 0), Colors::Red), v3(Vector3(1, -1, 0), Colors::Red), v4(Vector3(0, -1, 0), Colors::Blue);
+	//drawQuad(v1, v2, v3, v4);
 
 	// Render text, should be last object rendered.
 	renderTextOutput();
@@ -141,6 +155,17 @@ void Scene::drawQuad(Vertex v1, Vertex v2, Vertex v3, Vertex v4)
 	glColor3f(v4.color.x, v4.color.y, v4.color.z);
 	glVertex3f(v4.position.x, v4.position.y, v4.position.z);
 
+	glEnd();
+}
+
+void Scene::drawStrip(Vertex* vArray, int size)
+{
+	glBegin(GL_TRIANGLE_STRIP);
+	for (int i = 0; i < size; i++)
+	{
+		glColor3f(vArray[i].color.x, vArray[i].color.y, vArray[i].color.z);
+		glVertex3f(vArray[i].position.x, vArray[i].position.y, vArray[i].position.z);
+	}
 	glEnd();
 }
 
