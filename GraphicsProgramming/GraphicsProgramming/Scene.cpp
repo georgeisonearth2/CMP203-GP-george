@@ -21,6 +21,10 @@ Scene::Scene(Input* in)
 void Scene::handleInput(float dt)
 {
 	// Handle user input
+	if (input->isKeyDown('r'))
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void Scene::update(float dt)
@@ -41,9 +45,6 @@ void Scene::render() {
 	// Set the camera
 	gluLookAt(0.0f, 0.0f, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
-	//wireframe mode
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	
 	//triangle vertices
 	/*drawTriangle(v1, v2, v3);
 	drawTriangle(v2, v3, v4);*/
@@ -58,7 +59,7 @@ void Scene::render() {
 		v8(Vector3(4, 0, 0), Colors::Cyan);
 
 	drawStrip(new Vertex[8]{ v1, v2, v3, v4, v5, v6, v7, v8 }, 8);
-	
+
 	////quad vertices
 	//Vertex v1(Vector3(0, 0, 0), Colors::Blue), v2(Vector3(1, 0, 0), Colors::Red), v3(Vector3(1, -1, 0), Colors::Red), v4(Vector3(0, -1, 0), Colors::Blue);
 	//drawQuad(v1, v2, v3, v4);
