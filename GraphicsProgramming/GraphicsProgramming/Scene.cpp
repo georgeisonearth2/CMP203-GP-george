@@ -41,9 +41,13 @@ void Scene::render() {
 	// Set the camera
 	gluLookAt(0.0f, 0.0f, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 	
-	//triangle vertexes
-	Vertex v1(Vector3(0, 1, 0), Colors::Red), v2(Vector3(-1, -1, 0), Colors::Green), v3(Vector3(1, -1, 0), Colors::Blue);
-	drawTriangle(v1, v2, v3);
+	//triangle vertices
+	/*Vertex v1(Vector3(0, 1, 0), Colors::Red), v2(Vector3(-1, -1, 0), Colors::Green), v3(Vector3(1, -1, 0), Colors::Blue);
+	drawTriangle(v1, v2, v3);*/
+
+	//quad vertices
+	Vertex v1(Vector3(0, 0, 0), Colors::Blue), v2(Vector3(1, 0, 0), Colors::Red), v3(Vector3(1, -1, 0), Colors::Red), v4(Vector3(0, -1, 0), Colors::Blue);
+	drawQuad(v1, v2, v3, v4);
 
 	// Render text, should be last object rendered.
 	renderTextOutput();
@@ -101,7 +105,6 @@ void Scene::resize(int w, int h)
 void Scene::drawTriangle(Vertex v1, Vertex v2, Vertex v3)
 {
 	glBegin(GL_TRIANGLES);
-	//render color
 
 	//vertex 1
 	glColor3f(v1.color.x, v1.color.y, v1.color.z);
@@ -115,10 +118,31 @@ void Scene::drawTriangle(Vertex v1, Vertex v2, Vertex v3)
 	glColor3f(v3.color.x, v3.color.y, v3.color.z);
 	glVertex3f(v3.position.x, v3.position.y, v3.position.z);
 
-	// Render vertices
 	glEnd();
 }
 
+void Scene::drawQuad(Vertex v1, Vertex v2, Vertex v3, Vertex v4)
+{
+	glBegin(GL_QUADS);
+
+	//vertex 1
+	glColor3f(v1.color.x, v1.color.y, v1.color.z);
+	glVertex3f(v1.position.x, v1.position.y, v1.position.z);
+
+	//vertex 2
+	glColor3f(v2.color.x, v2.color.y, v2.color.z);
+	glVertex3f(v2.position.x, v2.position.y, v2.position.z);
+
+	//vertex 3
+	glColor3f(v3.color.x, v3.color.y, v3.color.z);
+	glVertex3f(v3.position.x, v3.position.y, v3.position.z);
+
+	//vertex 4
+	glColor3f(v4.color.x, v4.color.y, v4.color.z);
+	glVertex3f(v4.position.x, v4.position.y, v4.position.z);
+
+	glEnd();
+}
 
 // Calculates FPS
 void Scene::calculateFPS()
