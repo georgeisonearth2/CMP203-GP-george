@@ -158,7 +158,7 @@ void Scene::drawQuad(Vertex v1, Vertex v2, Vertex v3, Vertex v4)
 	glEnd();
 }
 
-void Scene::drawStrip(Vertex* vArray, int size)
+void Scene::drawStrip(Vertex vArray[], int size)
 {
 	glBegin(GL_TRIANGLE_STRIP);
 	for (int i = 0; i < size; i++)
