@@ -30,7 +30,7 @@ void Scene::handleInput(float dt)
 void Scene::update(float dt)
 {
 	// update scene related variables.
-	offset -= dt;
+
 	// Calculate FPS for output
 	calculateFPS();
 }
@@ -58,7 +58,7 @@ void Scene::render() {
 		v7(Vector3(3, -1, 0), Colors::Blue),
 		v8(Vector3(4, 0, 0), Colors::Cyan);
 
-	drawStrip(new Vertex[8]{ v1, v2, v3, v4, v5, v6, v7, v8 }, 8, offset);
+	drawStrip(new Vertex[8]{ v1, v2, v3, v4, v5, v6, v7, v8 }, 8);
 
 	////quad vertices
 	//Vertex v1(Vector3(0, 0, 0), Colors::Blue), v2(Vector3(1, 0, 0), Colors::Red), v3(Vector3(1, -1, 0), Colors::Red), v4(Vector3(0, -1, 0), Colors::Blue);
@@ -159,13 +159,13 @@ void Scene::drawQuad(Vertex v1, Vertex v2, Vertex v3, Vertex v4)
 	glEnd();
 }
 
-void Scene::drawStrip(Vertex vArray[], int size, float offset)
+void Scene::drawStrip(Vertex vArray[], int size)
 {
 	glBegin(GL_TRIANGLE_STRIP);
 	for (int i = 0; i < size; i++)
 	{
 		glColor3f(vArray[i].color.x, vArray[i].color.y, vArray[i].color.z);
-		glVertex3f(vArray[i].position.x + offset, vArray[i].position.y + offset, vArray[i].position.z);
+		glVertex3f(vArray[i].position.x, vArray[i].position.y, vArray[i].position.z);
 	}
 	glEnd();
 }
