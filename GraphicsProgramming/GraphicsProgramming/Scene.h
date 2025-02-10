@@ -40,8 +40,17 @@ public:
 private:
 	void drawTriangle(Vertex v1, Vertex v2, Vertex v3);
 	void drawQuad(Vertex v1, Vertex v2, Vertex v3, Vertex v4);
-	void drawStrip(Vertex* vArray, int size);
+	void drawStrip(Vertex vArray[], int size);
 	bool isWireframe = false;
+
+	int currentNumber = 1;
+	void Number1();
+	void Number2();
+	void Number3();
+	void Number4();
+	void Number5();
+	void Number6();
+	void Number7();
 
 protected:
 	// configure opengl render pipeline

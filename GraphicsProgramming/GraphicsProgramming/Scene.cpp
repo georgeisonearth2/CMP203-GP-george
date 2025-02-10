@@ -13,18 +13,83 @@ Scene::Scene(Input* in)
 
 	// Other OpenGL / render setting should be applied here.
 
-
 	// Initialise scene variables
+
+}
+//empty page
+void Scene::Number1()
+{
+	//empty <3
+}
+//white triangle
+void Scene::Number2()
+{
+	drawTriangle(Vertex(Vector3(0, 0, 0), Colors::White), Vertex(Vector3(2, 0, 0), Colors::White), Vertex(Vector3(1, 2, 0), Colors::White));
+}
+//green triangle
+void Scene::Number3()
+{
+	drawTriangle(Vertex(Vector3(0, 0, 0), Colors::Green), Vertex(Vector3(2, 0, 0), Colors::Green), Vertex(Vector3(1, 2, 0), Colors::Green));
+}
+// rgb triangle
+void Scene::Number4()
+{
+	drawTriangle(Vertex(Vector3(0, 0, 0), Colors::Red), Vertex(Vector3(2, 0, 0), Colors::Green), Vertex(Vector3(1, 2, 0), Colors::Blue));
+}
+//render a quad made of 2 triangles
+void Scene::Number5()
+{
+	drawTriangle(Vertex(Vector3(0, 0, 0), Colors::Red), Vertex(Vector3(1, 0, 0), Colors::Green), Vertex(Vector3(1, -1, 0), Colors::Blue));
+	drawTriangle(Vertex(Vector3(0, 0, 0), Colors::Red), Vertex(Vector3(1, -1, 0), Colors::Blue), Vertex(Vector3(0, -1, 0), Colors::Red));
+}
+//render a triangle strip + triangle fan + quad strip + polygon + wireframe on r pressed
+void Scene::Number6()
+{
+	Vertex
+		v1(Vector3(0, 0, 0), Colors::Red),
+		v2(Vector3(1, 0, 0), Colors::Green),
+		v3(Vector3(1, -1, 0), Colors::Blue),
+		v4(Vector3(2, 0, 0), Colors::Cyan),
+		v5(Vector3(2, -1, 0), Colors::Red),
+		v6(Vector3(3, 0, 0), Colors::Green),
+		v7(Vector3(3, -1, 0), Colors::Blue),
+		v8(Vector3(4, 0, 0), Colors::Cyan);
+	drawStrip(new Vertex[8]{ v1, v2, v3, v4, v5, v6, v7, v8 }, 8);
+
+	if (isWireframe)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+void Scene::Number7()
+{
 
 }
 
 void Scene::handleInput(float dt)
 {
-	// Handle user input
 	if (input->isKeyDown('r'))
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	else
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	{
+		isWireframe = !isWireframe;
+		//wait 0.4 seconds before allowing another key press
+		Sleep(100);
+	}
+	// Handle user input
+	if (input->isKeyDown('1'))
+		currentNumber = 1;
+	else if (input->isKeyDown('2'))
+		currentNumber = 2;
+	else if (input->isKeyDown('3'))
+		currentNumber = 3;
+	else if (input->isKeyDown('4'))
+		currentNumber = 4;
+	else if (input->isKeyDown('5'))
+		currentNumber = 5;
+	else if (input->isKeyDown('6'))
+		currentNumber = 6;
+	else if (input->isKeyDown('7'))
+		currentNumber = 7;
 }
 
 void Scene::update(float dt)
@@ -48,21 +113,45 @@ void Scene::render() {
 	//triangle vertices
 	/*drawTriangle(v1, v2, v3);
 	drawTriangle(v2, v3, v4);*/
-	Vertex
-		v1(Vector3(0, 0, 0), Colors::Red),
-		v2(Vector3(1, 0, 0), Colors::Green),
-		v3(Vector3(1, -1, 0), Colors::Blue),
-		v4(Vector3(2, 0, 0), Colors::Cyan),
-		v5(Vector3(2, -1, 0), Colors::Red),
-		v6(Vector3(3, 0, 0), Colors::Green),
-		v7(Vector3(3, -1, 0), Colors::Blue),
-		v8(Vector3(4, 0, 0), Colors::Cyan);
-
-	drawStrip(new Vertex[8]{ v1, v2, v3, v4, v5, v6, v7, v8 }, 8);
-
+	//Vertex
+	//	v1(Vector3(0, 0, 0), Colors::Red),
+	//	v2(Vector3(1, 0, 0), Colors::Green),
+	//	v3(Vector3(1, -1, 0), Colors::Blue),
+	//	v4(Vector3(2, 0, 0), Colors::Cyan),
+	//	v5(Vector3(2, -1, 0), Colors::Red),
+	//	v6(Vector3(3, 0, 0), Colors::Green),
+	//	v7(Vector3(3, -1, 0), Colors::Blue),
+	//	v8(Vector3(4, 0, 0), Colors::Cyan);
+	//drawStrip(new Vertex[8]{ v1, v2, v3, v4, v5, v6, v7, v8 }, 8);
 	////quad vertices
 	//Vertex v1(Vector3(0, 0, 0), Colors::Blue), v2(Vector3(1, 0, 0), Colors::Red), v3(Vector3(1, -1, 0), Colors::Red), v4(Vector3(0, -1, 0), Colors::Blue);
 	//drawQuad(v1, v2, v3, v4);
+
+	switch (currentNumber)
+	{
+	case 1:
+		Number1();
+		break;
+	case 2:
+		Number2();
+		break;
+	case 3:
+		Number3();
+		break;
+	case 4:
+		Number4();
+		break;
+	case 5:
+		Number5();
+		break;
+	case 6:
+		Number6();
+		break;
+
+	case 7:
+		Number7();
+		break;
+	}
 
 	// Render text, should be last object rendered.
 	renderTextOutput();
