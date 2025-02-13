@@ -9,13 +9,15 @@ void SolarSystem::render()
 	glLoadIdentity();
 	// Set the camera
 	gluLookAt(0.0f, 0.0f, 6.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-	glTranslatef(layer1Pos.x, layer1Pos.y, layer1Pos.z);
-	Vertex
-		v1(Vector3(0, 0, 0), Colors::Red),
-		v2(Vector3(1, 0, 0), Colors::Green),
-		v3(Vector3(1, -1, 0), Colors::Blue);
-	drawTriangle(v1, v2, v3);
-	drawCircle(0, 0, 0, 1, 100);
+	//glTranslatef(layer1Pos.x, layer1Pos.y, layer1Pos.z);
+	//Vertex
+	//	v1(Vector3(0, 0, 0), Colors::Red),
+	//	v2(Vector3(1, 0, 0), Colors::Green),
+	//	v3(Vector3(1, -1, 0), Colors::Blue);
+	//drawTriangle(v1, v2, v3);
+
+	drawCircle(0, 0, 0, 1.0f, 100, Colors::Yellow);
+	drawCircle(0, 0, 0, 0.1f, 100, Colors::Blue);
 	// Render text, should be last object rendered.
 	renderTextOutput();
 	// Swap buffers, after all objects are rendered.
@@ -28,7 +30,7 @@ void SolarSystem::update(float dt)
 	calculateFPS();
 }
 
-void SolarSystem::drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfSides)
+void SolarSystem::drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfSides, Vector3 color)
 {
     int numberOfVertices = numberOfSides + 2;
 
@@ -58,6 +60,7 @@ void SolarSystem::drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GL
         allCircleVertices[(i * 3) + 2] = circleVerticesZ[i];
     }
 
+	glColor3f(color.x, color.y, color.z);
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_FLOAT, 0, allCircleVertices);
     glDrawArrays(GL_TRIANGLE_FAN, 0, numberOfVertices);

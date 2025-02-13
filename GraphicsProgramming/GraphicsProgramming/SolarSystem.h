@@ -13,6 +13,6 @@ public:
 private:
 	Vector3 layer1Pos;
 	float triangleSpeed = 10;
-	void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfSides);
+	void drawCircle(GLfloat x, GLfloat y, GLfloat z, GLfloat radius, GLint numberOfSides, Vector3 color);
 };
 #endif
