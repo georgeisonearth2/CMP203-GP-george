@@ -21,13 +21,13 @@ class Scene
 {
 
 public:
-	Scene(Input *in);
+	explicit Scene(Input *in);
 	// Main render function
-	void render();
+	virtual void render();
 	// Handle input function that receives delta time from parent.
 	void handleInput(float dt);
 	// Update function receives delta time from parent (used for frame independent updating).
-	void update(float dt);
+	virtual void update(float dt);
 	// Resizes the OpenGL output based on new window size.
 	void resize(int w, int h);
 	// vertex struct def
@@ -37,8 +37,8 @@ public:
 		Vector3 position;
 		Vector3 color;
 	};
-private:
 	void drawTriangle(Vertex v1, Vertex v2, Vertex v3);
+private:
 	void drawQuad(Vertex v1, Vertex v2, Vertex v3, Vertex v4);
 	void drawStrip(Vertex vArray[], int size);
 	bool isWireframe = false;

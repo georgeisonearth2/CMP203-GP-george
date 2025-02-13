@@ -10,10 +10,12 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include "Scene.h"
+#include "SolarSystem.h"
 #include "Input.h"
 
 // Required variables; pointer to scene and input objects. Initialise variable used in delta time calculation.
 Scene* scene;
+SolarSystem* solarSystem;
 Input* input;
 int oldTimeSinceStart = 0;
 
@@ -22,7 +24,8 @@ int oldTimeSinceStart = 0;
 // scene object to refresh the OpenGL buffers to the new dimensions.
 void changeSize(int w, int h) 
 {
-	scene->resize(w, h);
+	//scene->resize(w, h);
+	solarSystem->resize(w, h);
 }
 
 // Called as part of the GLUT main loop.
@@ -37,9 +40,13 @@ void renderScene(void)
 	deltaTime = deltaTime / 1000.0f;
 
 	// Update Scene and render next frame.
-	scene->handleInput(deltaTime);
+	/*scene->handleInput(deltaTime);
 	scene->update(deltaTime);
-	scene->render();
+	scene->render();*/
+	solarSystem->handleInput(deltaTime);
+	solarSystem->update(deltaTime);
+	solarSystem->render();
+	
 }
 
 // Handles keyboard input events from GLUT.
@@ -177,8 +184,8 @@ int main(int argc, char **argv)
 
 	// Initialise input and scene objects.
 	input = new Input();
-	scene = new Scene(input);
-	
+	//scene = new Scene(input);
+	solarSystem = new SolarSystem(input);
 	// Enter GLUT event processing cycle
 	glutMainLoop();
 

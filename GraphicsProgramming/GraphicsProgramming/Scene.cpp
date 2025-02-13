@@ -72,7 +72,6 @@ void Scene::handleInput(float dt)
 	if (input->isKeyDown('r'))
 	{
 		isWireframe = !isWireframe;
-		//wait 0.4 seconds before allowing another key press
 		Sleep(100);
 	}
 	// Handle user input
