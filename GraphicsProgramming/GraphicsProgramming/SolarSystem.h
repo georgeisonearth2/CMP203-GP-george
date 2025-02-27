@@ -3,6 +3,7 @@
 
 #include "Scene.h"
 #include "Vector3.h"
+
 class SolarSystem :
 	public Scene
 {

@@ -1,3 +1,5 @@
+#ifndef Constants_H
+#define Constants_H
 #include "Vector3.h"
 
 class Colors
@@ -11,3 +13,4 @@ public:
 	static const Vector3 Blue;
 	static const Vector3 White;
 };
+#endif

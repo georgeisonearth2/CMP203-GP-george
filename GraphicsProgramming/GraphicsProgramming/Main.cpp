@@ -11,10 +11,12 @@
 #include <gl/GLU.h>
 #include "Scene.h"
 #include "SolarSystem.h"
+#include "LightingMaterials.h"
 #include "Input.h"
 
 // Required variables; pointer to scene and input objects. Initialise variable used in delta time calculation.
 Scene* scene;
+LightingMaterials* lightingMaterials;
 SolarSystem* solarSystem;
 Input* input;
 int oldTimeSinceStart = 0;
@@ -25,7 +27,8 @@ int oldTimeSinceStart = 0;
 void changeSize(int w, int h) 
 {
 	//scene->resize(w, h);
-	solarSystem->resize(w, h);
+	//solarSystem->resize(w, h);
+	lightingMaterials->resize(w, h);
 }
 
 // Called as part of the GLUT main loop.
@@ -43,10 +46,15 @@ void renderScene(void)
 	/*scene->handleInput(deltaTime);
 	scene->update(deltaTime);
 	scene->render();*/
-	solarSystem->handleInput(deltaTime);
-	solarSystem->update(deltaTime);
-	solarSystem->render();
+
+	//Solar System
+	//solarSystem->handleInput(deltaTime);
+	//solarSystem->update(deltaTime);
+	//solarSystem->render();
 	
+	lightingMaterials->handleInput(deltaTime);
+	lightingMaterials->update(deltaTime);
+	lightingMaterials->render();
 }
 
 // Handles keyboard input events from GLUT.
@@ -185,7 +193,8 @@ int main(int argc, char **argv)
 	// Initialise input and scene objects.
 	input = new Input();
 	//scene = new Scene(input);
-	solarSystem = new SolarSystem(input);
+	//solarSystem = new SolarSystem(input);
+	lightingMaterials = new LightingMaterials(input);
 	// Enter GLUT event processing cycle
 	glutMainLoop();
 
